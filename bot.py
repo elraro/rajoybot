@@ -7,8 +7,6 @@ from os import environ
 
 import telebot.types as types
 
-# "447250438:AAHE5my2cUQrcrKGPYnawfDLsn1ekxFjw6E"
-
 if environ.get('TOKEN') is not None:
     token = environ.get('TOKEN')
 else:
@@ -83,7 +81,7 @@ def query_text(inline_query):
         r = []
         for i, sound in enumerate(sounds):
             if text in sound[2]:
-                r.append(types.InlineQueryResultVoice(str(i), sound[0], sound[1], voice_duration=7))
+                r.append(types.InlineQueryResultVoice(str(i), sound[0], sound[1]))
         bot.answer_inline_query(inline_query.id, r)
     except Exception as e:
         print(e)
