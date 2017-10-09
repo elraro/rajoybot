@@ -1,12 +1,12 @@
-FROM debian:stretch
+FROM python:3-slim
 
-# Install all dependencies
-RUN apt-get update && apt-get -y install python3 python3-pip
+# Install THE requirement
 RUN pip3 install pytelegrambotapi
-RUN pip3 install request
 
-COPY bot.py /
 COPY startup.sh /
 RUN chmod +x /startup.sh
 
+COPY bot.py /
+
 ENTRYPOINT ["/startup.sh"]
+CMD ["python3", "/bot.py"]

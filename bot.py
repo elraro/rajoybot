@@ -69,17 +69,21 @@ def send_welcome(message):
     bot.send_message(cid,
                      "Creado por @elraro . Puedes mejorarme en la siguiente dirección: https://github.com/elraro/rajoyBot")
 
+@bot.inline_handler(lambda query: query.query == '')
+def query_empty(inline_query):
+    r = []
+    for i, sound in enumerate(sounds):
+        r.append(types.InlineQueryResultVoice(str(i), sound[0], sound[1], voice_duration=7))
+    bot.answer_inline_query(inline_query.id, r)
 
 @bot.inline_handler(lambda query: query.query)
 def query_text(inline_query):
     try:
         text = inline_query.query.translate(remove).lower()
         r = []
-        count = 1
-        for sound in sounds:
+        for i, sound in enumerate(sounds):
             if text in sound[2]:
-                r.append(types.InlineQueryResultVoice(str(count), sound[0], sound[1], voice_duration=7))
-                count += 1
+                r.append(types.InlineQueryResultVoice(str(i), sound[0], sound[1], voice_duration=7))
         bot.answer_inline_query(inline_query.id, r)
     except Exception as e:
         print(e)
