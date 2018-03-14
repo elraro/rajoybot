@@ -60,7 +60,9 @@ sounds = [["http://rajoy.elraro.eu/sound0.ogg", "Cuanto peor mejor para todos",
           ["http://rajoy.elraro.eu/sound21.ogg", "Lo mejor para el próximo año 2016",
            "lo mejor para el proximo año 2016, que sinceramente falta nos hace a todos"],
           ["http://rajoy.elraro.eu/sound22.ogg", "Lo imposible",
-           "y hare todo lo posible e incluso lo imposible, si tambien lo imposible es posible"]]
+           "y hare todo lo posible e incluso lo imposible, si tambien lo imposible es posible"],
+          ["http://rajoy.elraro.eu/sound23.ogg", "Qué se puede hacer",
+           "los gobernantes ya saben que se puede hacer, y que no se puede hacer"]]
 
 
 @bot.message_handler(commands=['start'])
