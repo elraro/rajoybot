@@ -1,4 +1,4 @@
-import telebot
+﻿import telebot
 import requests
 import sys
 import time
@@ -58,7 +58,9 @@ sounds = [["http://rajoy.elraro.eu/sound0.ogg", "Cuanto peor mejor para todos",
           ["http://rajoy.elraro.eu/sound20.ogg", "Hilitos de na",
            "se piensa que el fuel esta aun enfriandose, salen unos pequeños hilitos"],
           ["http://rajoy.elraro.eu/sound21.ogg", "Lo mejor para el próximo año 2016",
-           "lo mejor para el proximo año 2016, que sinceramente falta nos hace a todos"]]
+           "lo mejor para el proximo año 2016, que sinceramente falta nos hace a todos"],
+          ["http://rajoy.elraro.eu/sound22.ogg", "Lo imposible",
+           "y hare todo lo posible e incluso lo imposible, si tambien lo imposible es posible"]]
 
 
 @bot.message_handler(commands=['start'])
