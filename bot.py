@@ -78,7 +78,7 @@ def query_empty(inline_query):
     r = []
     for i, sound in enumerate(sounds):
         r.append(types.InlineQueryResultVoice(str(i), sound[0], sound[1]))
-    bot.answer_inline_query(inline_query.id, r)
+    bot.answer_inline_query(inline_query.id, r, cache_time=3600)
 
 @bot.inline_handler(lambda query: query.query)
 def query_text(inline_query):
@@ -88,7 +88,7 @@ def query_text(inline_query):
         for i, sound in enumerate(sounds):
             if text in sound[2]:
                 r.append(types.InlineQueryResultVoice(str(i), sound[0], sound[1]))
-        bot.answer_inline_query(inline_query.id, r)
+        bot.answer_inline_query(inline_query.id, r, cache_time=3600)
     except Exception as e:
         print(e)
 
