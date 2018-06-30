@@ -3,3 +3,4 @@ unidecode
 requests
 pony
 uptime
+pymysql
