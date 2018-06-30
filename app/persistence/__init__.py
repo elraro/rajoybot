@@ -48,7 +48,7 @@ class Database:
             LOG.info('Starting persistence layer using MySQL on %s db: %s', host, database_name)
             LOG.debug('MySQL data: host --> %s, user --> %s, db --> %s, password empty --> %s',
                       host, user, database_name, str(password is None))
-            db.bind(provider='mysql', host=host, port=port, user=user, passwd=password, db=database_name)
+            db.bind(provider='mysql', host=host, port=int(port), user=user, passwd=password, db=database_name)
         elif provider == 'postgres':
             LOG.info('Starting persistence layer using PostgreSQL on %s db: %s', host, database_name, create_db=True)
             LOG.debug('PostgreSQL data: host --> %s, user --> %s, db --> %s, password empty --> %s',
