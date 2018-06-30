@@ -1,0 +1,5 @@
+pytelegrambotapi
+unidecode
+requests
+pony
+uptime

@@ -1,12 +1,14 @@
-FROM python:3-slim
+FROM python:3-alpine
 
-# Install THE requirement
-RUN pip3 install pytelegrambotapi
+COPY requirements.txt /
+RUN pip3 install -r requirements.txt
 
-COPY startup.sh /
-RUN chmod +x /startup.sh
+WORKDIR /app
+VOLUME /data
 
-COPY bot.py /
+ENV SQLITE_FILE=/data/db.sqlite
+ENV DATA_JSON=/app/data.json
 
-ENTRYPOINT ["/startup.sh"]
-CMD ["python3", "/bot.py"]
+ADD app /app
+
+ENTRYPOINT ["python3", "bot.py"]
