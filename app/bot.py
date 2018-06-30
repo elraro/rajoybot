@@ -96,7 +96,7 @@ LOG.info('Starting up bot...')
 
 if args.mysql_host:
     LOG.info('Using MySQL as persistence layer: host %s port %s', args.mysql_host, args.mysql_port)
-    database = Database('mysql', host=args.mysql_host, user="rajoybot", password="rajoybot", database_name="rajoybot")
+    database = Database('mysql', host=args.mysql_host, port=args.mysql_port, user="rajoybot", password="rajoybot", database_name="rajoybot")
 else:
     LOG.info('Using SQLite as persistence layer: %s', args.sqlite)
     database = Database('sqlite', filename=args.sqlite)
