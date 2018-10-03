@@ -130,6 +130,11 @@
       "filename": "sound25.ogg",
       "text": "Chuches",
       "tags": "Va a subir el IVA de los chuches"
+    },
+    {
+      "filename": "sound26.ogg",
+      "text": "Vaso",
+      "tags": "Un vaso es un vaso"
     }
   ]
 }
