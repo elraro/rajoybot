@@ -94,7 +94,7 @@
         {
       "filename": "sound18.ogg",
       "text": "No mas IVA",
-      "tags": "no mas IVA', esto es un clamor que recorre España de arriba a abajo y de abajo a arriba"
+      "tags": "no mas iva', esto es un clamor que recorre España de arriba a abajo y de abajo a arriba"
     },
     {
       "filename": "sound19.ogg",
@@ -135,6 +135,16 @@
       "filename": "sound26.ogg",
       "text": "¿Piensan antes de hablar?",
       "tags": "piensan antes de hablar hablan tras pensar"
+    },
+    {
+      "filename": "sound27.ogg",
+      "text": "It's very difficult todo ésto",
+      "tags": "very difficult todo esto"
+    },
+    {
+      "filename": "sound28.ogg",
+      "text": "Como decía Galileo...",
+      "tags": "como decia galileo el movimiento siempre se acelera cuando se va a detener"
     }
   ]
 }
