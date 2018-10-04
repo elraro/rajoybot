@@ -94,7 +94,7 @@
         {
       "filename": "sound18.ogg",
       "text": "No mas IVA",
-      "tags": "no mas IVA', esto es un clamor que recorre España de arriba a abajo y de abajo a arriba"
+      "tags": "no mas iva', esto es un clamor que recorre España de arriba a abajo y de abajo a arriba"
     },
     {
       "filename": "sound19.ogg",
@@ -123,18 +123,33 @@
     },
     {
       "filename": "sound24.ogg",
-      "text": "Eta",
-      "tags": "ETA es una gran nacion"
+      "text": "ETA",
+      "tags": "eta es una gran nacion"
     },
     {
       "filename": "sound25.ogg",
       "text": "Chuches",
-      "tags": "Va a subir el IVA de los chuches"
+      "tags": "va a subir el iva de los chuches"
     },
     {
       "filename": "sound26.ogg",
       "text": "Vaso",
-      "tags": "Un vaso es un vaso"
+      "tags": "un vaso es un vaso"
+    },
+    {
+      "filename": "sound27.ogg",
+      "text": "¿Piensan antes de hablar?",
+      "tags": "piensan antes de hablar hablan tras pensar"
+    },
+    {
+      "filename": "sound28.ogg",
+      "text": "It's very difficult todo ésto",
+      "tags": "very difficult todo esto"
+    },
+    {
+      "filename": "sound29.ogg",
+      "text": "Como decía Galileo...",
+      "tags": "como decia galileo el movimiento siempre se acelera cuando se va a detener"
     }
   ]
 }
