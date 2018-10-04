@@ -133,16 +133,21 @@
     },
     {
       "filename": "sound26.ogg",
+      "text": "Vaso",
+      "tags": "un vaso es un vaso"
+    },
+    {
+      "filename": "sound27.ogg",
       "text": "¿Piensan antes de hablar?",
       "tags": "piensan antes de hablar hablan tras pensar"
     },
     {
-      "filename": "sound27.ogg",
+      "filename": "sound28.ogg",
       "text": "It's very difficult todo ésto",
       "tags": "very difficult todo esto"
     },
     {
-      "filename": "sound28.ogg",
+      "filename": "sound29.ogg",
       "text": "Como decía Galileo...",
       "tags": "como decia galileo el movimiento siempre se acelera cuando se va a detener"
     }
