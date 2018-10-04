@@ -12,6 +12,7 @@ from persistence import *
 from persistence import tools
 import os
 import PrettyUptime
+import webhook
 
 LOG = logger.get_logger('RajoyBot')
 REMOVE_CHARS = string.punctuation + string.whitespace
@@ -24,7 +25,10 @@ _ENV_MYSQL_HOST = 'MYSQL_HOST'
 _ENV_MYSQL_PORT = 'MYSQL_PORT'
 _ENV_DATA_JSON = 'DATA_JSON'
 _ENV_LOGGING_FILE = 'LOGFILE'
-
+_ENV_WEBHOOK_HOST = 'WEBHOOK_HOST'
+_ENV_WEBHOOK_PORT = 'WEBHOOK_PORT'
+_ENV_WEBHOOK_LISTEN = 'WEBHOOK_LISTEN'
+_ENV_WEBHOOK_LISTEN_PORT = 'WEBHOOK_LISTEN_PORT'
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-v", "--verbosity", help="Defines log verbosity",
@@ -38,6 +42,12 @@ parser.add_argument("--token", type=str, help="Telegram API token given by @botf
 parser.add_argument("--admin", type=str, help="Alias of the admin user.")
 parser.add_argument("--data", type=str, help="Data JSON path.", default='data.json')
 parser.add_argument("--logfile", type=str, help="Log to defined file.")
+parser.add_argument("--webhook-host", type=str, help="Sets a webhook to the specified host.")
+parser.add_argument("--webhook-port", type=int, help="Webhook port. Default is 443.", default=443)
+parser.add_argument("--webhook-listening", type=str, help="Webhook local listening IP. Default is 0.0.0.0",
+                    default="0.0.0.0")
+parser.add_argument("--webhook-listening-port", type=int, help="Webhook local listening port. Default is 8080",
+                    default=8080)
 
 args = parser.parse_args()
 
@@ -89,6 +99,26 @@ except KeyError:
 
 try:
     args.sqlite = os.environ[_ENV_SQLITE_FILE]
+except KeyError:
+    pass
+
+try:
+    args.webhook_host = os.environ[_ENV_WEBHOOK_HOST]
+except KeyError:
+    pass
+
+try:
+    args.webhook_port = os.environ[_ENV_WEBHOOK_PORT]
+except KeyError:
+    pass
+
+try:
+    args.webhook_listening = os.environ[_ENV_WEBHOOK_LISTEN]
+except KeyError:
+    pass
+
+try:
+    args.webhook_listening_port = os.environ[_ENV_WEBHOOK_LISTEN_PORT]
 except KeyError:
     pass
 
@@ -243,17 +273,21 @@ def send_uptime(message):
 sounds = synchronize_sounds()
 LOG.info('Serving %i sounds.', len(sounds))
 
-while True:
-    try:
-        sleep(1)
-        LOG.debug("Polling started")
-        bot.polling()
-    except requests.exceptions.ConnectionError as connection_error:
-        LOG.error("ConnectionError: Cannot connect to server.")
-        LOG.debug(connection_error)
-    except requests.exceptions.ReadTimeout as read_timeout:
-        LOG.error("ReadTimeout: Lost connection to the server.")
-        LOG.debug(read_timeout)
-    except Exception as e:
-        LOG.critical(e)
-        raise e
+if args.webhook_host:
+    webhook.start_webhook(bot, args.webhook_host, args.webhook_port, args.webhook_listening, args.webhook_listening_port)
+else:
+    bot.remove_webhook()
+    while True:
+        try:
+            sleep(1)
+            LOG.debug("Polling started")
+            bot.polling()
+        except requests.exceptions.ConnectionError as connection_error:
+            LOG.error("ConnectionError: Cannot connect to server.")
+            LOG.debug(connection_error)
+        except requests.exceptions.ReadTimeout as read_timeout:
+            LOG.error("ReadTimeout: Lost connection to the server.")
+            LOG.debug(read_timeout)
+        except Exception as e:
+            LOG.critical(e)
+            raise e

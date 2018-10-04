@@ -3,7 +3,7 @@ DEFAULT_LOG_LEVEL = logging.DEBUG
 DEFAULT_FORMATTER = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
 # create logger with 'spam_application'
-logger = logging.getLogger('LaVidaModerna_Bot')
+logger = logging.getLogger('RajoyBot')
 logger.setLevel(DEFAULT_LOG_LEVEL)
 # create console handler with a higher log level
 ch = logging.StreamHandler()
