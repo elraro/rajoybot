@@ -41,8 +41,8 @@ services:
        - "127.0.0.1:25826:25826/udp"
      volumes:
        - influxdb:/var/lib/influxdb
-       - /data/influxdb/influxdb.conf:/etc/influxdb/influxdb.conf:ro
-       - /data/influxdb/types.db:/usr/share/collectd/types.db:ro
+       - ./influxdb/influxdb.conf:/etc/influxdb/influxdb.conf:ro
+       - ./influxdb/types.db:/usr/share/collectd/types.db:ro
      environment:
        - config=/etc/influxdb/influxdb.conf
 volumes:
