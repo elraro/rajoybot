@@ -1,0 +1,51 @@
+version: '3.6'
+
+services:
+   mariadb:
+     image: mariadb:10.3
+     volumes:
+       - mariadb_data:/var/lib/mysql
+     restart: always
+     environment:
+       MYSQL_ROOT_PASSWORD: rajoybot
+       MYSQL_DATABASE: rajoybot
+       MYSQL_USER: rajoybot
+       MYSQL_PASSWORD: rajoybot
+
+   rajoybot:
+     depends_on:
+       - mariadb
+     image: elraro/rajoybot
+     restart: always
+     environment:
+       TELEGRAM_BOT_TOKEN: 426763455:AAH5IIJkeWdai8xRYgjku5P-nFcJZTyqSaY
+       TELEGRAM_USER_ALIAS: elraro
+       MYSQL_HOST: mariadb
+
+   grafana:
+     depends_on:
+       - mariadb
+       - influxdb
+     image: grafana/grafana
+     restart: always
+     ports:
+      - "3000:3000"
+     volumes:
+       - grafana_data:/var/lib/grafana
+
+   influxdb:
+     image: influxdb:latest
+     restart: always
+     ports:
+     #  - "127.0.0.1:8086:8086"
+       - "127.0.0.1:25826:25826/udp"
+     volumes:
+       - influxdb:/var/lib/influxdb
+       - /data/influxdb/influxdb.conf:/etc/influxdb/influxdb.conf:ro
+       - /data/influxdb/types.db:/usr/share/collectd/types.db:ro
+     environment:
+       - config=/etc/influxdb/influxdb.conf
+volumes:
+    mariadb_data:
+    grafana_data:
+    influxdb:
