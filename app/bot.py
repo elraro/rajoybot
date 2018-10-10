@@ -30,7 +30,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("-v", "--verbosity", help="Defines log verbosity",
                     choices=['CRITICAL', 'ERROR', 'WARN', 'INFO', 'DEBUG'], default='INFO')
 parser.add_argument("-b", "--bucket", help="Bucket or url where audios are stored",
-                    default='http://rajoy.elraro.eu/')
+                    default='https://github.com/elraro/RajoyBot/raw/master/RajoyBotSounds/')
 parser.add_argument("--sqlite", help="SQLite file path")
 parser.add_argument("--mysql-host", help="mysql host")
 parser.add_argument("--mysql-port", type=str, help="mysql port", default='3306')
