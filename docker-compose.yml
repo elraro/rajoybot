@@ -18,7 +18,7 @@ services:
      image: elraro/rajoybot
      restart: always
      environment:
-       TELEGRAM_BOT_TOKEN: 426763455:AAH5IIJkeWdai8xRYgjku5P-nFcJZTyqSaY
+       TELEGRAM_BOT_TOKEN: XXXX:XXXX
        TELEGRAM_USER_ALIAS: elraro
        MYSQL_HOST: mariadb
 
