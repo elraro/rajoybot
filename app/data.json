@@ -150,6 +150,21 @@
       "filename": "galileo.ogg",
       "text": "Como decía Galileo...",
       "tags": "como decia galileo el movimiento siempre se acelera cuando se va a detener"
+    },
+    {
+      "filename": "75_millones.ogg",
+      "text": "75 millones de españoles",
+      "tags": "una espana a la que 75 millones de espanoles vienen cada ano"
+    },
+    {
+      "filename": "fin_de_la_cita.ogg",
+      "text": "Fin de la cita.",
+      "tags": "fin de la cita"
+    },
+    {
+      "filename": "no_he_dormido_nada.ogg",
+      "text": "No he dormido nada, no pregunten demasiado",
+      "tags": "no he dormido nada no pregunten demasiado"
     }
   ]
 }
