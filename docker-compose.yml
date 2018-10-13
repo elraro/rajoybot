@@ -13,6 +13,7 @@ services:
        MYSQL_PASSWORD: rajoybot
 
    rajoybot:
+     build: ./
      depends_on:
        - mariadb
      image: elraro/rajoybot
