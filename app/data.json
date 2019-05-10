@@ -160,6 +160,11 @@
       "filename": "no_he_dormido_nada.ogg",
       "text": "No he dormido nada, no pregunten demasiado",
       "tags": "no he dormido nada no pregunten demasiado"
+    },
+    {
+      "filename": "domo_arigato_gozaimasu.ogg",
+      "text": "Domo arigato gozaimasu",
+      "tags": "domo arigato gozaimasu gosaymas"
     }
   ]
 }
