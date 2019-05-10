@@ -13,13 +13,12 @@ services:
        MYSQL_PASSWORD: rajoybot
 
    rajoybot:
-     build: ./
      depends_on:
        - mariadb
      image: elraro/rajoybot
      restart: always
      environment:
-       TELEGRAM_BOT_TOKEN: XXXX:XXXX
+       TELEGRAM_BOT_TOKEN: 426763455:AAGCziOgg-_S5Me6wXsIWEjcNM8NU_cVjzY
        TELEGRAM_USER_ALIAS: elraro
        MYSQL_HOST: mariadb
 
@@ -30,7 +29,7 @@ services:
      image: grafana/grafana
      restart: always
      ports:
-      - "3000:3000"
+      - "127.0.0.1:3001:3000"
      volumes:
        - grafana_data:/var/lib/grafana
 
