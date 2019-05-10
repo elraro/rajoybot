@@ -1,4 +1,4 @@
-FROM python:3.6.6-stretch
+FROM python:3.7-stretch
 
 COPY requirements.txt /
 RUN apt update
