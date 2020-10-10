@@ -185,6 +185,11 @@
       "filename": "ha_estado_muy_bien.ogg",
       "text": "Ha estado muy bien",
       "tags": "ha estado muy bien"
+    },
+    {
+      "filename": "aroma_de_lo_absurdo.ogg",
+      "text": "¿Percibe usted el aroma de lo absurdo?",
+      "tags": "percibe usted el aroma de lo absurdo"
     }
   ]
 }
