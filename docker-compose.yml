@@ -3,6 +3,7 @@ version: '3.6'
 services:
    rajoybot:
      image: elraro/rajoybot
+     container_name: rajoybot
      restart: always
      environment:
        TELEGRAM_BOT_TOKEN: XXXX:XXXX
