@@ -52,7 +52,7 @@
       "tags": "viva el vino"
     },
     {
-      "filename": "ceramica_talavera.ogg",
+      "filename": "ceramica_talavera_v2.ogg",
       "text": "La ceramica de Talavera",
       "tags": "la ceramica de talavera no es cosa menor, dicho de otra forma: es cosa mayor"
     },
@@ -188,8 +188,8 @@
     },
     {
       "filename": "aroma_de_lo_absurdo.ogg",
-      "text": "¿Percibe usted el aroma de lo absurdo?",
-      "tags": "percibe usted el aroma de lo absurdo"
+      "text": "¿Percibe el aroma de lo absurdo?",
+      "tags": "percibe el aroma de lo absurdo"
     }
   ]
 }
