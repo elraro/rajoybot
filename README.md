@@ -1,6 +1,6 @@
 # RajoyBot "Somos sentimientos y tenemos seres humanos"
 
-[![Docker Build Status](https://img.shields.io/docker/build/elraro/rajoybot)](https://hub.docker.com/r/elraro/rajoybot)
+[![Docker Automated build](https://img.shields.io/docker/cloud/automated/elraro/rajoybot)](https://hub.docker.com/r/elraro/rajoybot) [![Docker Build Status](https://img.shields.io/docker/cloud/build/elraro/rajoybot)](https://hub.docker.com/r/elraro/rajoybot)
 
 Bot de Telegram con frases de nuestro querido ex-presidente Mariano Rajoy Brey.
 
