@@ -1,23 +1,9 @@
-FROM python:3.6-alpine
+FROM python:3.7-stretch
 
 COPY requirements.txt /
-RUN apk update \
-    && apk add --virtual build-dependencies \
-        build-base \
-        gcc \
-        wget \
-        git \
-        libffi-dev \
-        openssl-dev \
-    && pip3 install -r requirements.txt \
-    && apk del build-dependencies \
-        build-base \
-        gcc \
-        wget \
-        git \
-        libffi-dev \
-        openssl-dev \
-    && rm -rf /var/cache/apk/*
+RUN apt update
+RUN apt install gcc -y
+RUN pip3 install -r requirements.txt
 
 WORKDIR /app
 VOLUME /data
