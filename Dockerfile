@@ -1,8 +1,8 @@
 FROM python:3.7-stretch
 
-COPY requirements.txt /
-RUN apt update
-RUN apt install gcc -y
+EXPOSE 8080
+
+COPY requirements.txt
 RUN pip3 install -r requirements.txt
 
 WORKDIR /app

@@ -30,6 +30,7 @@ _ENV_WEBHOOK_PORT = 'WEBHOOK_PORT'
 _ENV_WEBHOOK_LISTEN = 'WEBHOOK_LISTEN'
 _ENV_WEBHOOK_LISTEN_PORT = 'WEBHOOK_LISTEN_PORT'
 
+
 parser = argparse.ArgumentParser()
 parser.add_argument("-v", "--verbosity", help="Defines log verbosity",
                     choices=['CRITICAL', 'ERROR', 'WARN', 'INFO', 'DEBUG'], default='INFO')
@@ -48,6 +49,7 @@ parser.add_argument("--webhook-listening", type=str, help="Webhook local listeni
                     default="0.0.0.0")
 parser.add_argument("--webhook-listening-port", type=int, help="Webhook local listening port. Default is 8080",
                     default=8080)
+
 
 args = parser.parse_args()
 
@@ -122,11 +124,32 @@ try:
 except KeyError:
     pass
 
+try:
+    args.webhook_host = os.environ[_ENV_WEBHOOK_HOST]
+except KeyError:
+    pass
+
+try:
+    args.webhook_port = os.environ[_ENV_WEBHOOK_PORT]
+except KeyError:
+    pass
+
+try:
+    args.webhook_listening = os.environ[_ENV_WEBHOOK_LISTEN]
+except KeyError:
+    pass
+
+try:
+    args.webhook_listening_port = os.environ[_ENV_WEBHOOK_LISTEN_PORT]
+except KeyError:
+    pass
+
 LOG.info('Starting up bot...')
 
 if args.mysql_host:
     LOG.info('Using MySQL as persistence layer: host %s port %s', args.mysql_host, args.mysql_port)
-    database = Database('mysql', host=args.mysql_host, port=args.mysql_port, user="rajoybot", password="rajoybot", database_name="rajoybot")
+    database = Database('mysql', host=args.mysql_host, port=args.mysql_port, user="rajoybot", password="rajoybot",
+                        database_name="rajoybot")
 else:
     LOG.info('Using SQLite as persistence layer: %s', args.sqlite)
     database = Database('sqlite', filename=args.sqlite)
@@ -274,7 +297,8 @@ sounds = synchronize_sounds()
 LOG.info('Serving %i sounds.', len(sounds))
 
 if args.webhook_host:
-    webhook.start_webhook(bot, args.webhook_host, args.webhook_port, args.webhook_listening, args.webhook_listening_port)
+    webhook.start_webhook(bot, args.webhook_host, args.webhook_port, args.webhook_listening,
+                          args.webhook_listening_port)
 else:
     bot.remove_webhook()
     while True:
