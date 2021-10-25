@@ -124,26 +124,6 @@ try:
 except KeyError:
     pass
 
-try:
-    args.webhook_host = os.environ[_ENV_WEBHOOK_HOST]
-except KeyError:
-    pass
-
-try:
-    args.webhook_port = os.environ[_ENV_WEBHOOK_PORT]
-except KeyError:
-    pass
-
-try:
-    args.webhook_listening = os.environ[_ENV_WEBHOOK_LISTEN]
-except KeyError:
-    pass
-
-try:
-    args.webhook_listening_port = os.environ[_ENV_WEBHOOK_LISTEN_PORT]
-except KeyError:
-    pass
-
 LOG.info('Starting up bot...')
 
 if args.mysql_host:
