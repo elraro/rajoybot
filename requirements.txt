@@ -5,4 +5,3 @@ pony
 uptime
 aiohttp
 pymysql
-aiohttp
