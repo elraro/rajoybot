@@ -186,9 +186,9 @@ def object_to_sound(db_object):
 
 def object_to_user(db_object):
     return {'id': db_object.id, 'is_bot': db_object.is_bot, 'first_name': db_object.first_name,
-            'username': (db_object.username if db_object.username is not '' else None),
-            'last_name': (db_object.last_name if db_object.last_name is not '' else None),
-            'language_code': (db_object.language_code if db_object.language_code is not '' else None)}
+            'username': (db_object.username if db_object.username != '' else None),
+            'last_name': (db_object.last_name if db_object.last_name != '' else None),
+            'language_code': (db_object.language_code if db_object.language_code != '' else None)}
 
 
 def object_to_query(db_object):
