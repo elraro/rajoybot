@@ -3,7 +3,6 @@ import requests
 import string
 import telebot.types as types
 import argparse
-import logger
 import json
 import unidecode
 import random
