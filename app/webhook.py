@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from utils.loggerfactory import LoggerFactory
+from persistence.loggerfactory import LoggerFactory
 from aiohttp import web
 import telebot
 
