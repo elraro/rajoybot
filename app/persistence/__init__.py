@@ -1,8 +1,8 @@
-import logging
+from .loggerfactory import LoggerFactory
 import datetime
 from pony.orm import *
 
-LOG = logging.getLogger('RajoyBot.persistence')
+LOG = LoggerFactory('RajoyBot.persistence').get_logger()
 db = Database()
 
 
