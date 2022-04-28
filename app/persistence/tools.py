@@ -1,6 +1,6 @@
 from . import *
 
-LOG = logging.getLogger('RajoyBot.persistence.tools')
+LOG = LoggerFactory('RajoyBot.persistence.tools').get_logger()
 
 
 @db_session
