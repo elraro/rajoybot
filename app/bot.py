@@ -14,7 +14,7 @@ import os
 import PrettyUptime
 import webhook
 
-LOG = logger.get_logger('RajoyBot')
+LOG = LoggerFactory('RajoyBot.persistence').get_logger()
 REMOVE_CHARS = string.punctuation + string.whitespace
 TELEGRAM_INLINE_MAX_RESULTS = 48
 
