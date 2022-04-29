@@ -61,9 +61,9 @@ except KeyError:
     pass
 
 if args.logfile:
-    logger.add_file_handler(args.logfile, args.verbosity)
+    LOG.add_file_handler(args.logfile, args.verbosity)
 
-logger.set_log_level(args.verbosity)
+LOG.set_log_level(args.verbosity)
 
 
 try:
