@@ -60,10 +60,10 @@ try:
 except KeyError:
     pass
 
-if args.logfile:
-    LOG.add_file_handler(args.logfile, args.verbosity)
+#if args.logfile:
+#    LOG.add_file_handler(args.logfile, args.verbosity)
 
-LOG.set_log_level(args.verbosity)
+#LOG.set_log_level(args.verbosity)
 
 
 try:
