@@ -190,6 +190,11 @@
       "filename": "aroma_de_lo_absurdo.ogg",
       "text": "¿Percibe el aroma de lo absurdo?",
       "tags": "percibe el aroma de lo absurdo"
+    },
+    {
+      "filename": "hoy_estoy_aqui.ogg",
+      "text": "Hoy estoy aqui",
+      "tags": "hoy estoy aqui"
     }
   ]
 }
