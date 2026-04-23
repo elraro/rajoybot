@@ -1,7 +1,0 @@
-pytelegrambotapi
-unidecode
-requests
-pony
-uptime
-aiohttp
-pymysql

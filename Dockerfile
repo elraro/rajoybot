@@ -1,9 +1,11 @@
-FROM python:3.14-alpine
+FROM python:3.13-slim
 
 EXPOSE 8080
 
-COPY requirements.txt /
-RUN pip3 install -r requirements.txt
+# Install dependencies first (cached layer)
+WORKDIR /build
+COPY pyproject.toml .
+RUN pip3 install --no-cache-dir .
 
 WORKDIR /app
 VOLUME /data
@@ -11,6 +13,6 @@ VOLUME /data
 ENV SQLITE_FILE=/data/db.sqlite
 ENV DATA_JSON=/app/data.json
 
-ADD app /app
+COPY app/ /app/
 
 ENTRYPOINT ["python3", "bot.py"]

@@ -1,0 +1,16 @@
+.git
+.github
+.gitignore
+.env
+.env.example
+.mypy_cache
+__pycache__
+tests/
+*.md
+*.sqlite
+RajoyBotSounds/
+build.sh
+convert.sh
+startup.sh
+docker-compose.yml
+rotondas.json
