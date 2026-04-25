@@ -37,16 +37,18 @@ class TestSearchSounds:
         assert results[0]["filename"] == "cuanto_peor.ogg"
 
     def test_empty_query(self):
-        results = search_sounds("", SAMPLE_SOUNDS)
-        # Empty string should match everything (empty query_words list -> all() returns True)
-        assert len(results) == len(SAMPLE_SOUNDS)
+        # Empty queries are routed to query_empty in bot.py; search_sounds itself
+        # returns nothing so callers don't accidentally serve everything.
+        assert search_sounds("", SAMPLE_SOUNDS) == []
+        assert search_sounds("   ", SAMPLE_SOUNDS) == []
 
     def test_result_limit(self):
-        """Ensure results are capped at TELEGRAM_INLINE_MAX_RESULTS."""
+        """Ensure results are capped at TELEGRAM_INLINE_MAX_RESULTS, exactly."""
+        from bot import TELEGRAM_INLINE_MAX_RESULTS
         many_sounds = [{"id": i, "filename": f"s{i}.ogg", "text": f"Sound {i}", "tags": "common tag"}
                        for i in range(100)]
         results = search_sounds("common", many_sounds)
-        assert len(results) <= 49
+        assert len(results) == TELEGRAM_INLINE_MAX_RESULTS
 
     def test_single_character_query(self):
         results = search_sounds("a", SAMPLE_SOUNDS)

@@ -1,7 +1,7 @@
 import logging
 from typing import Any
 
-from tortoise import Tortoise, fields
+from tortoise import Tortoise, connections, fields
 from tortoise.models import Model
 
 LOG = logging.getLogger('RajoyBot.persistence')
@@ -23,7 +23,8 @@ class Sound(Model):
 
 
 class User(Model):
-    id = fields.IntField(primary_key=True, generated=False)
+    # Telegram user ids exceed 2^31; BIGINT is required.
+    id = fields.BigIntField(primary_key=True, generated=False)
     is_bot = fields.BooleanField()
     first_name = fields.CharField(max_length=255)
     last_name = fields.CharField(max_length=255, null=True)
@@ -102,13 +103,43 @@ class SoundRepository:
             LOG.info('Starting persistence layer on memory using SQLite.')
             db_url = "sqlite://:memory:"
 
-        await Tortoise.init(db_url=db_url, modules={'models': ['persistence']})
+        # _enable_global_fallback=True is required because python-telegram-bot runs
+        # post_init in one task and dispatches handlers in fresh tasks that don't
+        # inherit Tortoise's contextvar. The global fallback lets handlers find the
+        # connection cross-task. Without it, every handler hits "No TortoiseContext
+        # is currently active".
+        await Tortoise.init(
+            db_url=db_url,
+            modules={'models': ['persistence']},
+            _enable_global_fallback=True,
+        )
         await Tortoise.generate_schemas()
+        if self._provider == 'mysql':
+            await self._migrate_mysql_user_id_to_bigint()
+
+    async def _migrate_mysql_user_id_to_bigint(self) -> None:
+        """Idempotent migration for legacy MySQL deployments where user.id was INT.
+
+        Telegram user ids exceed 2^31; switching the column type is a no-op when
+        already BIGINT, so it's safe to run on every startup.
+        """
+        conn = connections.get('default')
+        statements = [
+            "ALTER TABLE queryhistory MODIFY COLUMN user_id BIGINT NOT NULL",
+            "ALTER TABLE resulthistory MODIFY COLUMN user_id BIGINT NOT NULL",
+            "ALTER TABLE `user` MODIFY COLUMN id BIGINT NOT NULL",
+        ]
+        for sql in statements:
+            try:
+                await conn.execute_query(sql)
+            except Exception as e:
+                LOG.warning("Schema migration step skipped (%s): %s", sql, e)
 
     # --- Sound operations ---
 
     async def get_sounds(self, include_disabled: bool = False) -> list[dict[str, Any]]:
-        return [_sound_to_dict(s) for s in await Sound.filter(disabled=include_disabled).all()]
+        query = Sound.all() if include_disabled else Sound.filter(disabled=False)
+        return [_sound_to_dict(s) for s in await query]
 
     async def get_sound(self, id: int | None = None, filename: str | None = None) -> dict[str, Any] | None:
         filters = {}
@@ -124,6 +155,16 @@ class SoundRepository:
     async def add_sound(self, id: int, filename: str, text: str, tags: str) -> None:
         LOG.info('Adding sound: %s %s', id, filename)
         await Sound.create(id=id, filename=filename, text=text, tags=tags, disabled=False)
+
+    async def enable_sound(self, filename: str) -> bool:
+        """Re-enable a previously soft-deleted sound. Returns True if a row was flipped."""
+        db_sound = await Sound.filter(filename=filename).first()
+        if db_sound is None or not db_sound.disabled:
+            return False
+        LOG.info('Re-enabling sound %s', filename)
+        db_sound.disabled = False
+        await db_sound.save()
+        return True
 
     async def delete_sound(self, sound: dict[str, Any]) -> None:
         LOG.info('Deleting sound %s', str(sound))
@@ -197,6 +238,17 @@ class SoundRepository:
 
     async def get_results(self) -> list[dict[str, Any]]:
         return [_result_to_dict(r) for r in await ResultHistory.all().prefetch_related('user', 'sound')]
+
+    # --- Counts (avoid loading entire tables for stats) ---
+
+    async def count_users(self) -> int:
+        return await User.all().count()
+
+    async def count_queries(self) -> int:
+        return await QueryHistory.all().count()
+
+    async def count_results(self) -> int:
+        return await ResultHistory.all().count()
 
 
 # --- Mappers ---
