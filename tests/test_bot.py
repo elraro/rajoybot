@@ -32,7 +32,9 @@ class TestUniqueSoundId:
         from bot import _generate_unique_sound_id
 
         new_id = await _generate_unique_sound_id(database)
-        assert 10_000_000 <= new_id <= 99_999_999
+        # 8-digit string of digits, joined and int()-ed: leading zeros disappear,
+        # so any value in [0, 99_999_999] is valid.
+        assert 0 <= new_id <= 99_999_999
         assert await database.get_sound(id=new_id) is None
 
     async def test_raises_when_no_id_available(self, database, monkeypatch):
