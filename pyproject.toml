@@ -9,7 +9,7 @@ description = "Telegram bot that serves audio clips of Mariano Rajoy quotes"
 requires-python = ">=3.12"
 license = "GPL-3.0-only"
 dependencies = [
-    "python-telegram-bot~=22.7",
+    "python-telegram-bot[webhooks]~=22.7",
     "unidecode~=1.4",
     "tortoise-orm~=1.1",
     "aiosqlite~=0.22",
